@@ -1,31 +1,42 @@
+#!/usr/bin/python3
+"""
+Script to create the database 'alx_book_store' in MySQL server
+without using SELECT or SHOW, and with proper exception handling.
+"""
+
 import mysql.connector
 from mysql.connector import Error
 
 def create_database():
-    """Create the alx_book_store database if it doesn't exist"""
     try:
-        # Establish connection to MySQL server without specifying a database
+        # Attempt to connect to MySQL server
         connection = mysql.connector.connect(
-            host='localhost',
-            user='root',      # Replace with your MySQL username
-            password=''       # Replace with your MySQL password
+            host="localhost",
+            user="root",
+            password="your_password"  # replace with your MySQL root password
         )
-        
-        if connection.is_connected():
-            cursor = connection.cursor()
-            
-            # Create database if not exists (without using SELECT/SHOW)
-            cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
-            print("Database 'alx_book_store' created successfully!")
-            
-    except Error as e:
-        print(f"Error connecting to MySQL: {e}")
+
+        cursor = connection.cursor()
+        # Create database safely without SELECT/SHOW
+        cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
+        print("Database 'alx_book_store' created successfully!")
+
+    except mysql.connector.Error as err:
+        # Handle MySQL-specific errors
+        print("MySQL Error:", err)
+
+    except Exception as e:
+        # Handle any other unexpected errors
+        print("Unexpected Error:", e)
+
     finally:
-        # Close the connection
-        if 'connection' in locals() and connection.is_connected():
-            cursor.close()
-            connection.close()
-            print("MySQL connection is closed")
+        # Ensure the connection is closed
+        try:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+        except NameError:
+            pass
 
 if __name__ == "__main__":
     create_database()
