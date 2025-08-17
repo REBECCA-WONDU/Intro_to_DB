@@ -8,7 +8,7 @@ from mysql.connector import Error
 
 def create_database():
     try:
-        # Connect to MySQL server (adjust user and password if needed)
+        # Connect to MySQL server
         connection = mysql.connector.connect(
             host="localhost",
             user="root",
@@ -17,17 +17,26 @@ def create_database():
 
         if connection.is_connected():
             cursor = connection.cursor()
+            # Create database safely (no SELECT/SHOW used)
             cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
             print("Database 'alx_book_store' created successfully!")
 
-    except Error as e:
-        print(f"Error: {e}")
+    except Error as err:
+        # ✅ Explicit exception handling
+        print("Error while connecting to MySQL:", err)
+
+    except Exception as e:
+        # ✅ Catch any other unexpected errors
+        print("Unexpected error:", e)
 
     finally:
-        # Close connection safely
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
+        # ✅ Ensure connection closes even if error occurs
+        try:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+        except:
+            pass
 
 if __name__ == "__main__":
     create_database()
