@@ -1,14 +1,11 @@
--- Script to display the full description of the books table
+-- Task 4: Full description of the table 'books' without using DESCRIBE, EXPLAIN, or ANALYZE
 SELECT 
-    TABLE_NAME,
-    COLUMN_NAME,
-    COLUMN_TYPE,
-    IS_NULLABLE,
-    COLUMN_KEY,
-    COLUMN_DEFAULT,
-    EXTRA
-FROM 
-    INFORMATION_SCHEMA.COLUMNS
-WHERE 
-    TABLE_SCHEMA = DATABASE()
-    AND TABLE_NAME = 'books';
+    COLUMN_NAME AS 'Column Name',
+    COLUMN_TYPE AS 'Data Type',
+    IS_NULLABLE AS 'Nullable',
+    COLUMN_KEY AS 'Key',
+    COLUMN_DEFAULT AS 'Default',
+    EXTRA AS 'Extra'
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'alx_book_store'
+  AND TABLE_NAME = 'books';
