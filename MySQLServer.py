@@ -1,38 +1,31 @@
 #!/usr/bin/python3
-"""
-Script to create the database 'alx_book_store' in MySQL server
-without using any SELECT or SHOW statements, and with exception handling.
-"""
+"""Script to create the alx_book_store database in MySQL"""
 
 import mysql.connector
 from mysql.connector import Error
 
 def create_database():
-    connection = None
+    """Function to create the alx_book_store database"""
     try:
-        # Connect to MySQL server
+        # Establish connection to MySQL server without specifying a database
         connection = mysql.connector.connect(
             host="localhost",
-            user="root",
-            password="your_password"  # replace with your MySQL root password
+            user="root",  # Replace with your MySQL username if different
+            password=""   # Replace with your MySQL password if set
         )
-
-        cursor = connection.cursor()
-        # Create database safely
-        cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
-        print("Database 'alx_book_store' created successfully!")
-
-    except Error as err:
-        # Handle MySQL connection errors
-        print("MySQL Error:", err)
-
-    except Exception as e:
-        # Handle other unexpected errors
-        print("Unexpected Error:", e)
-
+        
+        if connection.is_connected():
+            cursor = connection.cursor()
+            
+            # Create database if it doesn't exist
+            cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
+            
+            print("Database 'alx_book_store' created successfully!")
+            
+    except Error as e:
+        print(f"Error connecting to MySQL: {e}")
     finally:
-        # Ensure connection is closed properly
-        if connection is not None and connection.is_connected():
+        if 'connection' in locals() and connection.is_connected():
             cursor.close()
             connection.close()
 
