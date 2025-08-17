@@ -1,12 +1,11 @@
--- Script to describe books table without prohibited keywords
+-- Task 4: Full description of the table 'books'
 SELECT 
-    COLUMN_NAME AS 'Column',
-    DATA_TYPE AS 'DataType',
-    CHARACTER_MAXIMUM_LENGTH AS 'MaxLength',
+    COLUMN_NAME AS 'Column Name',
+    COLUMN_TYPE AS 'Data Type',
     IS_NULLABLE AS 'Nullable',
-    COLUMN_KEY AS 'Key'
-FROM 
-    INFORMATION_SCHEMA.COLUMNS
-WHERE 
-    TABLE_NAME = 'books' 
-    AND TABLE_SCHEMA = 'alx_book_store';
+    COLUMN_KEY AS 'Key',
+    COLUMN_DEFAULT AS 'Default',
+    EXTRA AS 'Extra'
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'alx_book_store'
+  AND TABLE_NAME = 'books';
