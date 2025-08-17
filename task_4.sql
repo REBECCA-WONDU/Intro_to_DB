@@ -1,4 +1,4 @@
--- Task 4: Full description of the table 'books'
+-- Full description of the table 'books' without using DESCRIBE, EXPLAIN, or ANALYZE
 SELECT 
     COLUMN_NAME AS 'Column Name',
     COLUMN_TYPE AS 'Data Type',
