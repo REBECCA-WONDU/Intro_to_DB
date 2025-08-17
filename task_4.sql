@@ -1,13 +1,12 @@
--- Get full description of books table without using DESCRIBE/EXPLAIN/ANALYZE
+-- Script to describe books table without prohibited keywords
 SELECT 
-    COLUMN_NAME AS 'Field',
-    COLUMN_TYPE AS 'Type',
-    IS_NULLABLE AS 'Null',
-    COLUMN_KEY AS 'Key',
-    COLUMN_DEFAULT AS 'Default',
-    EXTRA AS 'Extra'
+    COLUMN_NAME AS 'Column',
+    DATA_TYPE AS 'DataType',
+    CHARACTER_MAXIMUM_LENGTH AS 'MaxLength',
+    IS_NULLABLE AS 'Nullable',
+    COLUMN_KEY AS 'Key'
 FROM 
-    information_schema.COLUMNS 
+    INFORMATION_SCHEMA.COLUMNS
 WHERE 
-    TABLE_SCHEMA = 'alx_book_store' 
-    AND TABLE_NAME = 'books';
+    TABLE_NAME = 'books' 
+    AND TABLE_SCHEMA = 'alx_book_store';
