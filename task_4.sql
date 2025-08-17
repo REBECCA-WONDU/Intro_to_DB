@@ -1,11 +1,13 @@
--- Full description of the table 'books' without using DESCRIBE, EXPLAIN, or ANALYZE
+-- Prints the full description of the 'books' table without DESCRIBE/EXPLAIN
 SELECT 
-    COLUMN_NAME AS 'Column Name',
-    COLUMN_TYPE AS 'Data Type',
-    IS_NULLABLE AS 'Nullable',
-    COLUMN_KEY AS 'Key',
-    COLUMN_DEFAULT AS 'Default',
-    EXTRA AS 'Extra'
-FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_SCHEMA = 'alx_book_store'
-  AND TABLE_NAME = 'books';
+    COLUMN_NAME, 
+    COLUMN_TYPE, 
+    IS_NULLABLE, 
+    COLUMN_KEY, 
+    COLUMN_DEFAULT, 
+    EXTRA 
+FROM 
+    INFORMATION_SCHEMA.COLUMNS 
+WHERE 
+    TABLE_SCHEMA = 'alx_book_store' 
+    AND TABLE_NAME = 'books';
