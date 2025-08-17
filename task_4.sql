@@ -1,5 +1,14 @@
--- Alternative version using INFORMATION_SCHEMA
-SELECT * 
-FROM INFORMATION_SCHEMA.COLUMNS 
-WHERE TABLE_SCHEMA = 'alx_book_store' 
-AND TABLE_NAME = 'books';
+-- Script to display the full description of the books table
+SELECT 
+    TABLE_NAME,
+    COLUMN_NAME,
+    COLUMN_TYPE,
+    IS_NULLABLE,
+    COLUMN_KEY,
+    COLUMN_DEFAULT,
+    EXTRA
+FROM 
+    INFORMATION_SCHEMA.COLUMNS
+WHERE 
+    TABLE_SCHEMA = DATABASE()
+    AND TABLE_NAME = 'books';
